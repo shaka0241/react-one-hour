@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import {Container,} from 'react-bootstrap'
+import {Container, Button} from 'react-bootstrap'
 import Navegador from './components/Navegador'
 import * as moment from 'moment'
 
@@ -20,7 +20,53 @@ class MiComponenteClase extends Component {
 			<p>Componente Clase</p>
 			)
 	}
-} 
+}
+
+class Contador extends Component {
+
+	constructor(props){
+		super(props);
+
+		this.state={
+			contador:0
+		};
+	}
+
+	aumentar = () =>{this.setState({contador:this.state.contador + 1})}
+	decrementar = () =>{this.setState({contador:this.state.contador - 1})}
+
+	render(){
+		return (
+			<div>
+				<p>{this.state.contador}</p>
+				<Button onClick={ this.aumentar }> Aumentar </Button> <span />
+				<Button onClick={ this.decrementar }> Decrementar </Button>
+			</div>
+			)
+	}
+}
+
+class Hora extends Component {
+
+	constructor(props){
+		super(props);
+
+		this.state={
+			hora: moment().format('LTS')
+		};
+	}
+
+	verHora = () =>{this.setState({hora:moment().format('LTS')})}
+
+	render(){
+		return (
+			<div>
+				<p>{this.state.hora}</p>
+				<Button onClick={ this.verHora }> Actualizar Hora </Button> <span />
+			</div>
+			)
+	}
+}  
 
 function App() {
 	let nombre = "Alberto"
@@ -31,6 +77,8 @@ function App() {
         <Navegador /> 
         <MiComponente fecha={fecha} nombre={nombre} />
         <MiComponenteClase />
+        <Contador />
+        <Hora />
       </Container>
     </div>
   );
