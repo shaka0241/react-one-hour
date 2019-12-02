@@ -3,27 +3,33 @@ import React, {Component} from 'react';
 import './App.css';
 import {Container,} from 'react-bootstrap'
 import Navegador from './components/Navegador'
+import * as moment from 'moment'
 
-function MiComponente(){
+function MiComponente(props){
 	return (
-		<p>Hola Mundo </p>
+		<div>
+		<p>Hola {props.nombre} </p>
+		<h1> Fecha Actual es {props.fecha} </h1>
+		</div>
 		)
 }
 
 class MiComponenteClase extends Component {
 	render(){
 		return (
-			<p>Hola soy una clase componente</p>
+			<p>Componente Clase</p>
 			)
 	}
 } 
 
 function App() {
+	let nombre = "Alberto"
+	let fecha = moment().format('MMMM Do YYYY, h:mm:ss a')
   return (
     <div className="App">
       <Container fluid="true">
         <Navegador /> 
-        <MiComponente />
+        <MiComponente fecha={fecha} nombre={nombre} />
         <MiComponenteClase />
       </Container>
     </div>
