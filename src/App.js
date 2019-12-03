@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import {Container, Button} from 'react-bootstrap'
+import {Container, Button, Row, Col, Card} from 'react-bootstrap'
 import Navegador from './components/Navegador'
 import * as moment from 'moment'
+// import axios from 'axios'
 
 function MiComponente(props){
 	return (
-		<div>
-		<p>Hola {props.nombre} </p>
-		<h1> Fecha Actual es {props.fecha} </h1>
-		</div>
+		<Row>
+		<Col lg="12"><Card>Hola {props.nombre}</Card></Col>
+		<Col lg="12"> Fecha Actual es {props.fecha} </Col>
+		</Row>
 		)
 }
 
@@ -37,11 +38,13 @@ class Contador extends Component {
 
 	render(){
 		return (
-			<div>
-				<p>{this.state.contador}</p>
+			<Row>
+				<Col lg="12">{this.state.contador}</Col>
+				<Col lg="12">
 				<Button onClick={ this.aumentar }> Aumentar </Button> <span />
 				<Button onClick={ this.decrementar }> Decrementar </Button>
-			</div>
+				</Col>
+			</Row>
 			)
 	}
 }
@@ -66,7 +69,33 @@ class Hora extends Component {
 			</div>
 			)
 	}
-}  
+}
+
+class CambioFondo extends Component {
+
+	constructor(props){
+		super(props);
+
+		this.state={
+			backgroundColor: 'red'
+		};
+	}
+
+	cambiaAzul = () =>{this.setState({backgroundColor: 'blue'})}
+	cambiaAmarillo = () =>{this.setState({backgroundColor: 'yellow'})}
+
+	render(){
+		return (
+			<div>
+				<p style={{color:this.state.backgroundColor}}>hola mundo</p>
+				<Button onClick={ this.cambiaAzul }> Azul </Button> <span />
+				<Button onClick={ this.cambiaAmarillo }> Amarillo </Button> <span />
+
+			</div>
+			)
+	}
+}
+
 
 function App() {
 	let nombre = "Alberto"
@@ -79,6 +108,7 @@ function App() {
         <MiComponenteClase />
         <Contador />
         <Hora />
+        <CambioFondo />
       </Container>
     </div>
   );
