@@ -88,8 +88,8 @@ class CambioFondo extends Component {
 		return (
 			<div>
 				<p style={{color:this.state.backgroundColor}}>hola mundo</p>
-				<Button onClick={ this.cambiaAzul }> Azul </Button> <span />
-				<Button onClick={ this.cambiaAmarillo }> Amarillo </Button> <span />
+				<Button style={{backgroundColor: 'blue'}} onClick={ this.cambiaAzul }> Azul </Button> <span />
+				<Button style={{backgroundColor: 'yellow', color: 'red'}} onClick={ this.cambiaAmarillo }> Amarillo </Button> <span />
 
 			</div>
 			)
@@ -155,6 +155,37 @@ class Formulario extends Component {
 	}
 }
 
+class Blog extends Component {
+		constructor(props){
+			super(props);
+			this.state = {
+				articles: []
+			}
+		}
+
+		componentDidMount(){
+			let consulta = fetch('https://jsonplaceholder.typicode.com/posts');
+
+			consulta.then(response => response.json()).then(data=>{
+				this.setState({
+					articles:data
+				})
+			})		
+		}
+
+	render(){
+		return(
+			<div>
+				{
+					this.state.articles.map( (articles)=> {
+						return <p className="paver">{articles.title}</p>
+					})
+				}
+			</div>
+			)
+	}
+}
+
 
 function App() {
 	let nombre = "Alberto"
@@ -169,6 +200,7 @@ function App() {
         <Hora />
         <CambioFondo />
         <Formulario />
+        <Blog />
       </Container>
     </div>
   );
